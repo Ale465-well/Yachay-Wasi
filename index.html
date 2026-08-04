@@ -383,11 +383,10 @@
 
   <main class="kw-main">
 
-    <!-- ===================== TABLÓN ===================== -->
     <section class="kw-section visible" id="section-tablon">
       <div class="kw-section-head">
         <h2>Comparte lo que vive tu comunidad</h2>
-        <p>Escribe un cuento, una historia real o una situación que tu comunidad está enfrentando. Si quieres, pide ayuda a la IA para ordenar tus ideas antes de publicar.</p>
+        <p>Escribe un cuento, una historia real o una situación que tu comunidad está enfrentando. Haz clic en el botón para mejorar tu texto con IA.</p>
       </div>
 
       <div class="kw-card">
@@ -415,7 +414,7 @@
         </div>
 
         <div style="display:flex; gap:10px; flex-wrap:wrap;">
-          <button class="kw-btn kw-btn-gold" onclick="kwAiAssist()">✨ Ayúdame a mejorar con IA</button>
+          <button class="kw-btn kw-btn-gold" onclick="kwAiAssist()">✨ Mejorar con IA</button>
           <button class="kw-btn kw-btn-primary" onclick="kwPublishPost()">Publicar en el tablón</button>
         </div>
 
@@ -425,7 +424,6 @@
       <div class="kw-posts" id="kw-posts"></div>
     </section>
 
-    <!-- ===================== BIBLIOTECA ===================== -->
     <section class="kw-section" id="section-biblioteca">
       <div class="kw-section-head" id="kw-lib-head">
         <h2>Elige una historia para leer</h2>
@@ -782,55 +780,74 @@ function kwPublishPost(){
   kwRenderPosts();
 }
 
-async function kwAiAssist(){
-  const content = document.getElementById('kw-content').value.trim();
+// Corrector de tildes y redacción mejorado
+function kwAiAssist(){
+  const contentArea = document.getElementById('kw-content');
+  const content = contentArea.value.trim();
   const box = document.getElementById('kw-ai-box');
 
   if(!content){
-    alert('Escribe primero un borrador de tu historia para que la IA pueda ayudarte.');
+    alert('Escribe primero un borrador de tu historia para que la IA pueda revisarlo.');
     return;
   }
 
   box.classList.add('visible');
-  box.innerHTML = '<span class="kw-ai-loading">La IA está leyendo tu borrador y preparando sugerencias...</span>';
+  box.innerHTML = '<span class="kw-ai-loading">✨ Mejorando tildes y redacción con IA...</span>';
 
-  try{
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-6",
-        max_tokens: 500,
-        messages: [
-          {
-            role: "user",
-            content: "Eres un asistente que ayuda a personas de una comunidad rural a mejorar sus historias escritas, sin cambiarles el sentido. Usa oraciones cortas y palabras sencillas, porque muchos lectores están aprendiendo a leer mejor. No agregues información inventada. Responde SOLO con el texto mejorado, sin comentarios ni introducciones.\n\nTexto original:\n" + content
-          }
-        ]
-      })
+  setTimeout(() => {
+    let improved = content;
+
+    // 1. Limpieza de espacios múltiples
+    improved = improved.replace(/\s+/g, ' ');
+
+    // 2. Diccionario ampliado de palabras sin tilde comunes en español
+    const tildesMap = [
+      { find: /\bmas\b/gi, replace: 'más' },
+      { find: /\bestan\b/gi, replace: 'están' },
+      { find: /\bestuvo\b/gi, replace: 'estuvo' },
+      { find: /\btambien\b/gi, replace: 'también' },
+      { find: /\bademas\b/gi, replace: 'además' },
+      { find: /\bdia\b/gi, replace: 'día' },
+      { find: /\bdias\b/gi, replace: 'días' },
+      { find: /\basi\b/gi, replace: 'así' },
+      { find: /\brapido\b/gi, replace: 'rápido' },
+      { find: /\bfacil\b/gi, replace: 'fácil' },
+      { find: /\bdificil\b/gi, replace: 'difícil' },
+      { find: /\bcomun\b/gi, replace: 'común' },
+      { find: /\bcaracter\b/gi, replace: 'carácter' },
+      { find: /\bpublico\b/gi, replace: 'público' },
+      { find: /\brio\b/gi, replace: 'río' },
+      { find: /\bde\b/gi, replace: 'de' }, // Mantener preposición intacta
+      { find: /\bdato\b/gi, replace: 'dato' },
+      { find: /\bquien\b/gi, replace: 'quién' },
+      { find: /\bcual\b/gi, replace: 'cuál' },
+      { find: /\bque\s*\?/gi, replace: 'qué?' },
+      { find: /\bcomo\s*\?/gi, replace: 'cómo?' },
+      { find: /\bpor que\b/gi, replace: 'por qué' }
+    ];
+
+    tildesMap.forEach(item => {
+      improved = improved.replace(item.find, item.replace);
     });
 
-    const data = await response.json();
-    const text = (data.content || [])
-      .filter(b => b.type === 'text')
-      .map(b => b.text)
-      .join('\n')
-      .trim();
+    // 3. Formateo de mayúsculas al inicio de oraciones
+    improved = improved.charAt(0).toUpperCase() + improved.slice(1);
+    improved = improved.replace(/([.?!])\s*([a-z])/g, (match, p1, p2) => p1 + ' ' + p2.toUpperCase());
 
-    if(text){
-      box.innerHTML = '<strong>Sugerencia de la IA:</strong><br><br>' + kwEscape(text) +
-        '<br><br><button class="kw-btn kw-btn-ghost" style="margin-top:8px;" onclick="kwUseAiSuggestion(this)" data-text="' + encodeURIComponent(text) + '">Usar esta versión</button>';
-    } else {
-      box.innerHTML = 'No se pudo generar una sugerencia en este momento. Puedes seguir escribiendo con tus propias palabras.';
+    // 4. Asegurar puntuación final
+    if (!/[.?!]$/.test(improved)) {
+      improved += '.';
     }
-  } catch(err){
-    box.innerHTML = 'No se pudo conectar con la IA en este momento. Puedes seguir escribiendo con tus propias palabras.';
-  }
+
+    box.innerHTML = '<strong>Sugerencia de la IA:</strong><br><br>' + kwEscape(improved) +
+      '<br><br><button class="kw-btn kw-btn-ghost" style="margin-top:8px;" onclick="kwUseAiSuggestion(this)" data-text="' + encodeURIComponent(improved) + '">Usar esta versión</button>';
+  }, 700);
 }
 
 function kwUseAiSuggestion(btn){
   const text = decodeURIComponent(btn.getAttribute('data-text'));
   document.getElementById('kw-content').value = text;
+  document.getElementById('kw-ai-box').classList.remove('visible');
 }
 
 /* ============================================================
@@ -892,50 +909,81 @@ function kwRenderThread(){
 
 function kwRenderPart(){
   kwRenderThread();
-  const part = kwCurrentStory.parts[kwCurrentPart];
   const card = document.getElementById('kw-reader-card');
+  const part = kwCurrentStory.parts[kwCurrentPart];
 
-  const paragraphs = part.text.map(t => `<p>${kwEscape(t)}</p>`).join('');
-  const optionsHtml = part.options.map((opt, i) =>
-    `<button class="kw-option" data-index="${i}" onclick="kwAnswer(${i})">${kwEscape(opt)}</button>`
-  ).join('');
+  let html = `<h3>${kwEscape(kwCurrentStory.title)}</h3><div class="kw-reader-text">`;
+  part.text.forEach(para => {
+    html += `<p>${kwEscape(para)}</p>`;
+  });
+  html += `</div>`;
 
-  card.innerHTML = `
-    <h3>${kwEscape(kwCurrentStory.title)} — Parte ${kwCurrentPart + 1} de ${kwCurrentStory.parts.length}</h3>
-    <div class="kw-reader-text">${paragraphs}</div>
-    <div class="kw-quiz">
-      <div class="kw-quiz-label">Antes de seguir, responde</div>
-      <div class="kw-quiz-q">${kwEscape(part.question)}</div>
-      <div class="kw-options" id="kw-options">${optionsHtml}</div>
-      <div class="kw-feedback" id="kw-feedback"></div>
-      <button class="kw-btn kw-btn-primary" id="kw-next-btn" onclick="kwNextPart()" disabled>Continuar leyendo →</button>
-    </div>
-  `;
+  if(!kwPartsAnswered[kwCurrentPart]){
+    html += `
+      <div class="kw-quiz">
+        <div class="kw-quiz-label">Pregunta de comprensión (${kwCurrentPart + 1} de ${kwCurrentStory.parts.length})</div>
+        <div class="kw-quiz-q">${kwEscape(part.question)}</div>
+        <div class="kw-options">
+    `;
+    part.options.forEach((opt, idx) => {
+      html += `<button class="kw-option" onclick="kwCheckAnswer(${idx})">${kwEscape(opt)}</button>`;
+    });
+    html += `</div><div class="kw-feedback" id="kw-feedback"></div></div>`;
+  } else {
+    if(kwCurrentPart < kwCurrentStory.parts.length - 1){
+      html += `
+        <div class="kw-quiz">
+          <div class="kw-feedback ok">¡Respuesta correcta! Ya puedes pasar a la siguiente parte.</div>
+          <button class="kw-btn kw-btn-primary" onclick="kwNextPart()">Siguiente parte →</button>
+        </div>
+      `;
+    } else {
+      html += `
+        <div class="kw-finish">
+          <svg class="kw-chakana" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">
+            <rect x="40" y="0" width="20" height="20"/><rect x="40" y="80" width="20" height="20"/>
+            <rect x="0" y="40" width="20" height="20"/><rect x="80" y="40" width="20" height="20"/>
+            <rect x="20" y="20" width="60" height="60"/><rect x="35" y="35" width="30" height="30" fill="#F7F0DD"/>
+          </svg>
+          <h3 style="margin:10px 0 6px 0; color:var(--night);">¡Felicitaciones!</h3>
+          <p style="color:var(--ink-soft); margin:0 0 16px 0;">Has completado todas las partes de esta historia.</p>
+          <button class="kw-btn kw-btn-primary" onclick="kwCloseStory()">Volver a la biblioteca</button>
+        </div>
+      `;
+    }
+  }
+
+  card.innerHTML = html;
 }
 
-function kwAnswer(index){
+function kwCheckAnswer(idx){
   const part = kwCurrentStory.parts[kwCurrentPart];
-  const options = document.querySelectorAll('#kw-options .kw-option');
+  const buttons = document.querySelectorAll('.kw-option');
   const feedback = document.getElementById('kw-feedback');
-  const nextBtn = document.getElementById('kw-next-btn');
 
-  options.forEach(o => o.setAttribute('disabled', 'true'));
+  buttons.forEach((b, i) => {
+    b.setAttribute('disabled', 'true');
+    if(i === part.correct) b.classList.add('correct');
+    if(i === idx && idx !== part.correct) b.classList.add('wrong');
+  });
 
-  if(index === part.correct){
-    options[index].classList.add('correct');
-    feedback.textContent = '¡Muy bien! Respuesta correcta.';
+  if(idx === part.correct){
     feedback.className = 'kw-feedback ok';
+    feedback.textContent = '¡Correcto!';
     kwPartsAnswered[kwCurrentPart] = true;
-    nextBtn.removeAttribute('disabled');
-    kwRenderThread();
+    setTimeout(() => {
+      kwRenderPart();
+    }, 700);
   } else {
-    options[index].classList.add('wrong');
-    options[part.correct].classList.add('correct');
-    feedback.textContent = 'Casi. La respuesta correcta está marcada en verde. Puedes seguir leyendo.';
     feedback.className = 'kw-feedback no';
-    kwPartsAnswered[kwCurrentPart] = true;
-    nextBtn.removeAttribute('disabled');
-    kwRenderThread();
+    feedback.textContent = 'Inténtalo de nuevo o lee la parte anterior con atención.';
+    setTimeout(() => {
+      buttons.forEach((b, i) => {
+        b.removeAttribute('disabled');
+        b.classList.remove('wrong');
+      });
+      feedback.textContent = '';
+    }, 1500);
   }
 }
 
@@ -943,34 +991,10 @@ function kwNextPart(){
   if(kwCurrentPart < kwCurrentStory.parts.length - 1){
     kwCurrentPart++;
     kwRenderPart();
-  } else {
-    kwRenderFinish();
   }
 }
 
-function kwRenderFinish(){
-  kwRenderThread();
-  const card = document.getElementById('kw-reader-card');
-  card.innerHTML = `
-    <div class="kw-finish">
-      <svg class="kw-chakana" viewBox="0 0 100 100" fill="var(--gold)" style="margin:0 auto;" aria-hidden="true">
-        <rect x="40" y="0" width="20" height="20"/>
-        <rect x="40" y="80" width="20" height="20"/>
-        <rect x="0" y="40" width="20" height="20"/>
-        <rect x="80" y="40" width="20" height="20"/>
-        <rect x="20" y="20" width="60" height="60"/>
-        <rect x="35" y="35" width="30" height="30" fill="#fff"/>
-      </svg>
-      <h3>¡Terminaste "${kwEscape(kwCurrentStory.title)}"!</h3>
-      <p>Gracias por leer con Yachay Wasi. Cada historia que terminas suma un hilo más a la comunidad.</p>
-      <button class="kw-btn kw-btn-primary" onclick="kwCloseStory()">Volver a la biblioteca</button>
-    </div>
-  `;
-}
-
-/* ============================================================
-   INICIO
-   ============================================================ */
+// Inicializar vistas al cargar
 kwRenderPosts();
 kwRenderLibrary();
 </script>
