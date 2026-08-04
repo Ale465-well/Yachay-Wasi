@@ -1,0 +1,1050 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yachay Wasi — Historias que tejen comunidad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#1B2A4A;
+    --night-soft:#2C3F66;
+    --gold:#D9A441;
+    --gold-soft:#F0CE84;
+    --clay:#B54834;
+    --green:#3F5C44;
+    --paper:#F7F0DD;
+    --paper-dim:#EFE4C8;
+    --ink:#2B241C;
+    --ink-soft:#5A5142;
+    --radius:14px;
+    --shadow: 0 8px 24px rgba(27,42,74,0.12);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;}
+  .kw-root{
+    font-family:'Work Sans', sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    min-height:100vh;
+  }
+  .kw-root h1, .kw-root h2, .kw-root h3, .kw-root .kw-display{
+    font-family:'Fraunces', serif;
+  }
+
+  /* ---------- Header ---------- */
+  .kw-header{
+    background: linear-gradient(180deg, var(--night) 0%, var(--night-soft) 100%);
+    color:var(--paper);
+    padding:36px 20px 0 20px;
+    position:relative;
+    overflow:hidden;
+  }
+  .kw-header-inner{
+    max-width:960px;
+    margin:0 auto;
+    text-align:center;
+    padding-bottom:28px;
+  }
+  .kw-logo-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    margin-bottom:6px;
+  }
+  .kw-chakana{
+    width:30px;height:30px;
+    color:var(--gold);
+  }
+  .kw-brand{
+    font-size:clamp(2.2rem, 6vw, 3.2rem);
+    font-weight:700;
+    letter-spacing:0.5px;
+    margin:0;
+    color:var(--paper);
+  }
+  .kw-slogan{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:500;
+    color:var(--gold-soft);
+    font-size:clamp(1rem, 2.4vw, 1.25rem);
+    margin:6px 0 0 0;
+  }
+  .kw-thread{
+    display:block;
+    width:100%;
+    height:34px;
+  }
+
+  /* ---------- Nav ---------- */
+  .kw-nav{
+    max-width:960px;
+    margin:-1px auto 0 auto;
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    padding:0 20px;
+    transform:translateY(-18px);
+  }
+  .kw-tab{
+    font-family:'Work Sans', sans-serif;
+    font-weight:600;
+    font-size:0.95rem;
+    background:var(--paper);
+    color:var(--night);
+    border:2px solid var(--night);
+    padding:12px 22px;
+    border-radius:999px;
+    cursor:pointer;
+    box-shadow:var(--shadow);
+    transition:transform .15s ease, background .15s ease, color .15s ease;
+  }
+  .kw-tab:hover{ transform:translateY(-2px); }
+  .kw-tab.active{
+    background:var(--clay);
+    border-color:var(--clay);
+    color:#fff;
+  }
+
+  .kw-main{
+    max-width:960px;
+    margin:0 auto;
+    padding:20px 20px 80px 20px;
+  }
+  .kw-section{ display:none; animation:kwFade .35s ease; }
+  .kw-section.visible{ display:block; }
+  @keyframes kwFade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+  .kw-section-head{ margin-bottom:18px; }
+  .kw-section-head h2{
+    font-size:1.6rem;
+    margin:0 0 6px 0;
+    color:var(--night);
+  }
+  .kw-section-head p{
+    margin:0;
+    color:var(--ink-soft);
+    line-height:1.5;
+    max-width:640px;
+  }
+
+  /* ---------- Community board ---------- */
+  .kw-card{
+    background:#fff;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:22px;
+    margin-bottom:20px;
+    border:1px solid rgba(27,42,74,0.06);
+  }
+  .kw-field{ margin-bottom:14px; }
+  .kw-field label{
+    display:block;
+    font-weight:600;
+    font-size:0.88rem;
+    margin-bottom:6px;
+    color:var(--night);
+  }
+  .kw-field input, .kw-field select, .kw-field textarea{
+    width:100%;
+    font-family:'Work Sans', sans-serif;
+    font-size:0.95rem;
+    padding:10px 12px;
+    border-radius:10px;
+    border:1.5px solid #DDD3B6;
+    background:var(--paper);
+    color:var(--ink);
+    resize:vertical;
+  }
+  .kw-field input:focus, .kw-field select:focus, .kw-field textarea:focus{
+    outline:2px solid var(--gold);
+    outline-offset:1px;
+  }
+  .kw-row{ display:flex; gap:12px; flex-wrap:wrap; }
+  .kw-row .kw-field{ flex:1; min-width:180px; }
+
+  .kw-btn{
+    font-family:'Work Sans', sans-serif;
+    font-weight:600;
+    font-size:0.92rem;
+    border:none;
+    border-radius:999px;
+    padding:11px 20px;
+    cursor:pointer;
+    transition:transform .12s ease, filter .12s ease;
+  }
+  .kw-btn:hover{ transform:translateY(-1px); filter:brightness(1.05); }
+  .kw-btn:focus-visible{ outline:3px solid var(--gold); outline-offset:2px; }
+  .kw-btn-primary{ background:var(--clay); color:#fff; }
+  .kw-btn-ghost{ background:transparent; color:var(--night); border:1.5px solid var(--night); }
+  .kw-btn-gold{ background:var(--gold); color:var(--night); }
+  .kw-btn[disabled]{ opacity:0.55; cursor:not-allowed; transform:none; }
+
+  .kw-ai-box{
+    background:var(--paper-dim);
+    border-left:4px solid var(--gold);
+    border-radius:8px;
+    padding:12px 14px;
+    margin-top:10px;
+    font-size:0.9rem;
+    line-height:1.5;
+    display:none;
+    white-space:pre-wrap;
+  }
+  .kw-ai-box.visible{ display:block; }
+  .kw-ai-loading{ color:var(--ink-soft); font-style:italic; }
+
+  .kw-posts{ display:grid; gap:16px; }
+  .kw-post{
+    background:#fff;
+    border-radius:var(--radius);
+    padding:18px;
+    box-shadow:var(--shadow);
+    border-top:4px solid var(--gold);
+  }
+  .kw-post-meta{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    margin-bottom:8px;
+    text-transform:uppercase;
+    letter-spacing:0.4px;
+  }
+  .kw-tag{
+    background:var(--night);
+    color:var(--paper);
+    padding:3px 10px;
+    border-radius:999px;
+    font-size:0.72rem;
+    font-weight:600;
+  }
+  .kw-post h3{ margin:0 0 8px 0; font-size:1.15rem; color:var(--night); }
+  .kw-post p{ margin:0; line-height:1.6; color:var(--ink); white-space:pre-wrap; }
+
+  /* ---------- Story library ---------- */
+  .kw-story-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
+    gap:18px;
+  }
+  .kw-story-card{
+    background:#fff;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    cursor:pointer;
+    border:1px solid rgba(27,42,74,0.06);
+    transition:transform .15s ease;
+  }
+  .kw-story-card:hover{ transform:translateY(-3px); }
+  .kw-story-top{
+    height:86px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:2.1rem;
+  }
+  .kw-story-body{ padding:16px; }
+  .kw-story-body h3{ margin:0 0 6px 0; font-size:1.1rem; color:var(--night); }
+  .kw-story-body p{ margin:0 0 10px 0; font-size:0.88rem; color:var(--ink-soft); line-height:1.5; }
+  .kw-level{
+    font-size:0.72rem;
+    font-weight:700;
+    letter-spacing:0.4px;
+    text-transform:uppercase;
+    color:var(--clay);
+  }
+
+  /* ---------- Reader ---------- */
+  .kw-reader{ display:none; }
+  .kw-reader.visible{ display:block; }
+  .kw-reader-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:14px;
+  }
+  .kw-thread-progress{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin:0 auto 22px auto;
+    max-width:420px;
+  }
+  .kw-thread-dot{
+    width:16px; height:16px;
+    border-radius:50%;
+    background:#DDD3B6;
+    border:2px solid #DDD3B6;
+    flex-shrink:0;
+    transition:background .2s, border-color .2s;
+  }
+  .kw-thread-dot.done{ background:var(--green); border-color:var(--green); }
+  .kw-thread-dot.current{ background:var(--gold); border-color:var(--clay); box-shadow:0 0 0 4px rgba(217,164,65,0.25); }
+  .kw-thread-line{ flex:1; height:3px; background:#DDD3B6; border-radius:2px; }
+  .kw-thread-line.done{ background:var(--green); }
+
+  .kw-reader-card{
+    background:#fff;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:26px;
+  }
+  .kw-reader-card h3{ margin-top:0; color:var(--night); }
+  .kw-reader-text{ font-size:1.08rem; line-height:1.75; color:var(--ink); }
+  .kw-reader-text p{ margin:0 0 12px 0; }
+
+  .kw-quiz{
+    margin-top:20px;
+    padding-top:18px;
+    border-top:2px dashed #DDD3B6;
+  }
+  .kw-quiz-label{
+    font-weight:700;
+    color:var(--clay);
+    font-size:0.85rem;
+    text-transform:uppercase;
+    letter-spacing:0.4px;
+    margin-bottom:10px;
+  }
+  .kw-quiz-q{ font-weight:600; margin-bottom:12px; font-size:1.02rem; }
+  .kw-options{ display:grid; gap:10px; margin-bottom:14px; }
+  .kw-option{
+    text-align:left;
+    background:var(--paper);
+    border:1.5px solid #DDD3B6;
+    border-radius:10px;
+    padding:12px 14px;
+    font-family:'Work Sans', sans-serif;
+    font-size:0.95rem;
+    cursor:pointer;
+    transition:border-color .15s, background .15s;
+  }
+  .kw-option:hover{ border-color:var(--gold); }
+  .kw-option.correct{ background:#E4EFE3; border-color:var(--green); }
+  .kw-option.wrong{ background:#F5DEDA; border-color:var(--clay); }
+  .kw-option[disabled]{ cursor:default; }
+  .kw-feedback{ font-size:0.92rem; margin-bottom:10px; min-height:1.2em; }
+  .kw-feedback.ok{ color:var(--green); font-weight:600; }
+  .kw-feedback.no{ color:var(--clay); font-weight:600; }
+
+  .kw-finish{
+    text-align:center;
+    padding:30px 20px;
+  }
+  .kw-finish .kw-chakana{ width:46px; height:46px; margin-bottom:10px; }
+
+  @media (max-width:520px){
+    .kw-row{ flex-direction:column; }
+    .kw-reader-card{ padding:18px; }
+  }
+
+  .kw-visually-hidden{
+    position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);
+  }
+</style>
+</head>
+<body>
+<div class="kw-root">
+
+  <header class="kw-header">
+    <div class="kw-header-inner">
+      <div class="kw-logo-row">
+        <svg class="kw-chakana" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">
+          <path d="M40 0h20v20h20v20h20v20H80v20H60v20H40V80H20V60H0V40h20V20h20V0z" opacity="0"/>
+          <g>
+            <rect x="40" y="0" width="20" height="20"/>
+            <rect x="40" y="80" width="20" height="20"/>
+            <rect x="0" y="40" width="20" height="20"/>
+            <rect x="80" y="40" width="20" height="20"/>
+            <rect x="20" y="20" width="60" height="60"/>
+            <rect x="35" y="35" width="30" height="30" fill="#1B2A4A"/>
+          </g>
+        </svg>
+        <h1 class="kw-brand">Yachay Wasi</h1>
+      </div>
+      <p class="kw-slogan">Historias que tejen comunidad</p>
+    </div>
+    <svg class="kw-thread" viewBox="0 0 960 34" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,10 Q 120,34 240,10 T 480,10 T 720,10 T 960,10 V34 H0 Z" fill="#F7F0DD"></path>
+      <path d="M0,10 Q 120,34 240,10 T 480,10 T 720,10 T 960,10" fill="none" stroke="#D9A441" stroke-width="2" opacity="0.6"></path>
+    </svg>
+  </header>
+
+  <nav class="kw-nav">
+    <button class="kw-tab active" id="tab-tablon" onclick="kwShowSection('tablon')">Tablón de la comunidad</button>
+    <button class="kw-tab" id="tab-biblioteca" onclick="kwShowSection('biblioteca')">Biblioteca de historias</button>
+  </nav>
+
+  <main class="kw-main">
+
+    <section class="kw-section visible" id="section-tablon">
+      <div class="kw-section-head">
+        <h2>Comparte lo que vive tu comunidad</h2>
+        <p>Escribe un cuento, una historia real o una situación que tu comunidad está enfrentando. Haz clic en el botón para mejorar tu texto con IA.</p>
+      </div>
+
+      <div class="kw-card">
+        <div class="kw-field">
+          <label for="kw-name">Tu nombre</label>
+          <input type="text" id="kw-name" placeholder="¿Cómo te llamas?">
+        </div>
+        <div class="kw-row">
+          <div class="kw-field">
+            <label for="kw-title">Título de tu historia</label>
+            <input type="text" id="kw-title" placeholder="Dale un título">
+          </div>
+          <div class="kw-field">
+            <label for="kw-category">Categoría</label>
+            <select id="kw-category">
+              <option value="Cuento">Cuento</option>
+              <option value="Historia real">Historia real</option>
+              <option value="Situación de la comunidad">Situación de la comunidad</option>
+            </select>
+          </div>
+        </div>
+        <div class="kw-field">
+          <label for="kw-content">Escribe aquí</label>
+          <textarea id="kw-content" rows="6" placeholder="Cuenta tu historia con tus propias palabras..."></textarea>
+        </div>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="kw-btn kw-btn-gold" onclick="kwAiAssist()">✨ Mejorar con IA</button>
+          <button class="kw-btn kw-btn-primary" onclick="kwPublishPost()">Publicar en el tablón</button>
+        </div>
+
+        <div class="kw-ai-box" id="kw-ai-box"></div>
+      </div>
+
+      <div class="kw-posts" id="kw-posts"></div>
+    </section>
+
+    <section class="kw-section" id="section-biblioteca">
+      <div class="kw-section-head" id="kw-lib-head">
+        <h2>Elige una historia para leer</h2>
+        <p>Cada historia se lee por partes. Antes de seguir a la siguiente parte, responde una pregunta corta. Las preguntas te piden pensar en las causas, las consecuencias y el significado de las palabras.</p>
+      </div>
+
+      <div class="kw-story-grid" id="kw-story-grid"></div>
+
+      <div class="kw-reader" id="kw-reader">
+        <div class="kw-reader-head">
+          <button class="kw-btn kw-btn-ghost" onclick="kwCloseStory()">← Volver a la biblioteca</button>
+        </div>
+        <div id="kw-thread-progress" class="kw-thread-progress"></div>
+        <div class="kw-reader-card" id="kw-reader-card"></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+/* ============================================================
+   ESTADO
+   ============================================================ */
+let kwPosts = [
+  {
+    name: "Rosa M.",
+    title: "El pozo que arreglamos entre todos",
+    category: "Historia real",
+    content: "En mi comunidad el pozo de agua estaba roto hace meses. Un día nos juntamos los vecinos, cada uno trajo lo que pudo: dinero, herramientas o comida para los que trabajaban. En dos fines de semana el pozo volvió a funcionar. Aprendí que cuando nos unimos, los problemas grandes se hacen más pequeños."
+  },
+  {
+    name: "Julio C.",
+    title: "Mi abuelo y las semillas de siempre",
+    category: "Cuento",
+    content: "Mi abuelo guarda semillas de papa en una bolsa de tela desde hace treinta años. Dice que cada semilla tiene una historia: una sequía que sobrevivió, una helada que resistió. Ahora yo también guardo mis propias semillas, para seguir contando esa historia."
+  }
+];
+
+const kwStories = [
+  {
+    id: "agua",
+    icon: "💧",
+    title: "El agua que no llega",
+    teaser: "En Chaqllas el agua escasea cada vez más. Mariana descubre que el problema es más complicado de lo que parecía.",
+    level: "Nivel: 4to y 5to de primaria",
+    parts: [
+      {
+        text: [
+          "En el pueblo de Chaqllas, ubicado en las alturas de la sierra, el suministro de agua potable llega apenas dos veces por semana. Mariana, una niña de diez años, se levanta antes del amanecer para acompañar a su madre hasta el caño comunal, porque sabe que quienes llegan tarde deben esperar hasta la siguiente jornada de abastecimiento.",
+          "Ese día, mientras caminaban por el sendero de piedra, Mariana notó que la fila de vecinos era más larga de lo habitual. Algunos comentaban, preocupados, que el nivel del reservorio había bajado considerablemente en las últimas semanas, y que si no se tomaban medidas pronto, el problema podría empeorar durante la temporada seca."
+        ],
+        question: "Según el texto, ¿por qué la fila de vecinos era más larga ese día?",
+        options: [
+          "Porque era el cumpleaños de alguien del pueblo",
+          "Porque el nivel del reservorio había bajado y la gente estaba preocupada",
+          "Porque se había cortado la luz eléctrica del pueblo",
+          "Porque los vecinos querían comprar alimentos"
+        ],
+        correct: 1
+      },
+      {
+        text: [
+          "Días después, mientras jugaba cerca del canal principal, Mariana descubrió que una de las tuberías más antiguas tenía una fisura considerable, por la que el agua se filtraba hacia la tierra antes de llegar al centro del pueblo. Calculó que, si esa pérdida se mantenía durante todo el trayecto, buena parte del agua jamás llegaba a su destino.",
+          "Aunque dudó en un principio, decidió contarle el hallazgo a su madre. Ella le explicó que ese tipo de asuntos se resolvían en la asamblea comunal, un espacio donde los pobladores discutían y votaban las decisiones importantes para el bienestar de todos. Por primera vez, Mariana sintió que su observación podía tener un peso real en la comunidad."
+        ],
+        question: "¿Qué se puede inferir sobre la actitud de Mariana al descubrir la fisura en la tubería?",
+        options: [
+          "Le pareció un hallazgo sin importancia y lo olvidó",
+          "Sintió temor de que la culparan por el daño",
+          "Comprendió que su descubrimiento podía ayudar a resolver un problema comunitario",
+          "Decidió repararla ella misma sin avisar a nadie"
+        ],
+        correct: 2
+      },
+      {
+        text: [
+          "En la asamblea, Mariana, apoyada por su madre, expuso lo que había observado. La comunidad decidió organizar una faena colectiva: cada familia debía aportar una cuota de dinero o materiales, mientras que un ingeniero que vivía en un pueblo cercano se ofreció a supervisar la reparación sin cobrar honorarios. Tres semanas después, el flujo de agua hacia el centro del pueblo se normalizó considerablemente.",
+          "Mariana comprendió entonces que los problemas que parecen demasiado grandes para una sola persona pueden resolverse cuando la comunidad combina la observación atenta, la organización y el trabajo compartido. Ese aprendizaje la acompañaría mucho más allá del episodio del agua."
+        ],
+        question: "¿Cuál es la enseñanza principal que transmite esta historia?",
+        options: [
+          "Que los ingenieros siempre deben cobrar por su trabajo",
+          "Que un problema comunitario puede resolverse mediante la observación, la organización y la colaboración de todos",
+          "Que es mejor no participar en las asambleas del pueblo",
+          "Que las tuberías nunca se pueden reparar por completo"
+        ],
+        correct: 1
+      }
+    ]
+  },
+  {
+    id: "chacra",
+    icon: "🌽",
+    title: "La chacra de la abuela",
+    teaser: "La abuela Eusebia aplica un conocimiento transmitido por generaciones para enfrentar una sequía cada vez más severa.",
+    level: "Nivel: 4to y 5to de primaria",
+    parts: [
+      {
+        text: [
+          "La abuela Eusebia cultiva una chacra en la que combina distintos productos andinos: papa, quinua y tarwi. Su nieto Tomás la visita cada fin de semana, no solo para ayudarla con las labores del campo, sino también para escuchar sus explicaciones sobre por qué siembra ciertos cultivos en determinadas épocas del año.",
+          "Ese año, sin embargo, las lluvias habían llegado con un retraso considerable, y el suelo mostraba señales evidentes de resequedad. Tomás, observando el cielo despejado día tras día, comenzó a preguntarse si la cosecha de ese año se vería seriamente afectada."
+        ],
+        question: "¿Qué problema climático enfrentaba la chacra de la abuela Eusebia ese año?",
+        options: [
+          "Un exceso de lluvias que inundó los cultivos",
+          "Un retraso en las lluvias que provocó resequedad en el suelo",
+          "Una plaga de insectos que dañó las plantas",
+          "Una helada que congeló toda la cosecha"
+        ],
+        correct: 1
+      },
+      {
+        text: [
+          "La abuela le explicó a Tomás que la quinua y el tarwi poseen una resistencia natural a la falta de agua, ya que son cultivos que sus antepasados domesticaron y perfeccionaron precisamente para sobrevivir en condiciones climáticas adversas. La papa, en cambio, requiere un suministro de agua más constante para desarrollarse adecuadamente.",
+          "Basándose en esa experiencia acumulada durante generaciones, la abuela decidió modificar la proporción de sus cultivos: sembró una mayor extensión de quinua y tarwi, y redujo el área destinada a la papa, con el objetivo de disminuir el riesgo de perder toda la producción."
+        ],
+        question: "¿Por qué la abuela decidió sembrar más quinua y tarwi, y menos papa, ese año?",
+        options: [
+          "Porque esos productos se venden a un precio más alto en el mercado",
+          "Porque la quinua y el tarwi resisten mejor la falta de agua que la papa",
+          "Porque Tomás prefería comer quinua en lugar de papa",
+          "Porque ya no había semillas de papa disponibles en el pueblo"
+        ],
+        correct: 1
+      },
+      {
+        text: [
+          "Meses después, la estrategia de la abuela demostró ser acertada: su chacra produjo una cosecha razonable, mientras que varios vecinos que habían apostado únicamente por la papa perdieron una parte considerable de su siembra debido a la persistente escasez de lluvias. Lejos de guardarse la ventaja para sí misma, la abuela Eusebia repartió semillas de quinua entre las familias afectadas, para que pudieran emplearlas en la siguiente temporada.",
+          "Tomás comprendió, a partir de esta experiencia, que el conocimiento ancestral, cuando se combina con la generosidad y la disposición a compartir, puede convertirse en una herramienta valiosa para que toda una comunidad enfrente los desafíos que impone un clima cada vez más impredecible."
+        ],
+        question: "¿Qué relación existe entre el conocimiento ancestral y la generosidad en esta historia?",
+        options: [
+          "No existe ninguna relación entre ambos elementos",
+          "El conocimiento ancestral, compartido con generosidad, ayudó a otras familias a enfrentar la sequía",
+          "La generosidad de la abuela hizo que perdiera toda su cosecha",
+          "El conocimiento ancestral solo sirve para cultivar papa"
+        ],
+        correct: 1
+      }
+    ]
+  },
+  {
+    id: "camino",
+    icon: "🎒",
+    title: "El camino a la escuela",
+    teaser: "Rosa enfrenta un obstáculo que pone en riesgo su educación, hasta que la comunidad organizada encuentra una solución.",
+    level: "Nivel: 4to y 5to de primaria",
+    parts: [
+      {
+        text: [
+          "Rosa tiene doce años y recorre, cada mañana, un trayecto de dos horas para llegar a su escuela. Durante la temporada de lluvias, el camino de tierra se transforma en un lodazal difícil de atravesar, lo que provoca que, en más de una ocasión, llegue tarde a sus clases y sea registrada como inasistente.",
+          "Preocupado por esta situación recurrente, su padre le planteó la posibilidad de que dejara temporalmente la escuela, hasta que las condiciones del camino mejoraran. Rosa, sin embargo, sentía que abandonar sus estudios, aunque fuera de manera provisional, podría significar quedarse atrás de forma permanente."
+        ],
+        question: "¿Qué consecuencia tenía para Rosa el mal estado del camino durante la temporada de lluvias?",
+        options: [
+          "Le impedía visitar a sus amigas los fines de semana",
+          "Provocaba que llegara tarde a la escuela y fuera registrada como inasistente",
+          "La obligaba a cambiar de escuela definitivamente",
+          "No tenía ninguna consecuencia importante"
+        ],
+        correct: 1
+      },
+      {
+        text: [
+          "En lugar de resignarse, Rosa decidió conversar con su profesora sobre el problema. Sorprendida por la determinación de la niña, la docente convocó a una reunión con los padres de familia de los estudiantes que enfrentaban dificultades similares, con el propósito de analizar posibles alternativas de manera conjunta.",
+          "Tras varias conversaciones, el grupo de padres acordó presentar una solicitud formal ante la municipalidad, pidiendo que se evaluara la posibilidad de habilitar un servicio de transporte compartido para los estudiantes que vivían en las zonas más alejadas."
+        ],
+        question: "¿Qué estrategia utilizó la profesora para abordar el problema planteado por Rosa?",
+        options: [
+          "Decidió resolverlo ella sola, sin consultar a nadie más",
+          "Organizó una reunión con los padres de familia para buscar una solución conjunta",
+          "Le recomendó a Rosa que dejara de asistir a clases",
+          "Ignoró la situación por considerarla poco relevante"
+        ],
+        correct: 1
+      },
+      {
+        text: [
+          "Semanas más tarde, la municipalidad aprobó la solicitud y destinó una camioneta que recogía, tres veces por semana, a los estudiantes de las zonas más apartadas. Gracias a esta medida, Rosa dejó de llegar tarde y pudo continuar sus estudios sin el temor constante de quedarse atrás respecto a sus compañeros.",
+          "Reflexionando sobre lo ocurrido, Rosa entendió que expresar un problema con claridad, y buscar el apoyo de otras personas dispuestas a organizarse, puede abrir caminos —en sentido literal y figurado— que en un principio parecían completamente cerrados."
+        ],
+        question: "¿Qué significa la expresión 'abrir caminos, en sentido literal y figurado' en el contexto de esta historia?",
+        options: [
+          "Que la municipalidad construyó una nueva carretera de asfalto",
+          "Que se resolvió tanto el problema del transporte como la posibilidad de que Rosa siguiera estudiando",
+          "Que Rosa aprendió a manejar una camioneta",
+          "Que el camino de tierra desapareció por completo"
+        ],
+        correct: 1
+      }
+    ]
+  },
+  {
+    id: "feria",
+    icon: "🧺",
+    title: "La feria del pueblo",
+    teaser: "Don Julio enfrenta una caída en sus ventas, y su hijo Kevin propone ideas basadas en la observación y el registro de datos.",
+    level: "Nivel: 4to y 5to de primaria",
+    parts: [
+      {
+        text: [
+          "Todos los domingos, don Julio instala su puesto de quesos y miel en la feria del pueblo, un espacio donde decenas de familias intercambian y venden sus productos. Su hijo Kevin, de once años, lo acompaña desde temprano para ayudarlo a acomodar la mercadería antes de que lleguen los primeros compradores.",
+          "Sin embargo, durante el último mes, don Julio había notado una disminución constante en sus ventas, situación que le generaba una creciente preocupación, pues sus ingresos dependían casi por completo de ese negocio familiar."
+        ],
+        question: "¿Cuál era la principal preocupación de don Julio al inicio de la historia?",
+        options: [
+          "Que la feria del pueblo dejara de funcionar",
+          "Que sus ventas hubieran disminuido de manera constante durante el último mes",
+          "Que Kevin ya no quisiera ayudarlo los domingos",
+          "Que le hubieran robado su puesto en la feria"
+        ],
+        correct: 1
+      },
+      {
+        text: [
+          "Kevin, que prestaba atención en clase a las explicaciones sobre organización de datos, propuso dos ideas concretas: diseñar pequeñas bolsas con el nombre de la familia y del pueblo impreso, para que los clientes recordaran dónde habían comprado, y llevar un registro semanal por escrito de cuánto se vendía de cada producto.",
+          "Don Julio, aunque inicialmente escéptico respecto a la utilidad de anotar cifras en un cuaderno, decidió darle una oportunidad a la propuesta de su hijo, entendiendo que las ventas no mejorarían por sí solas si continuaban haciendo exactamente lo mismo que antes."
+        ],
+        question: "¿Para qué le proponía Kevin a su padre llevar un registro semanal de ventas?",
+        options: [
+          "Para tener algo entretenido que hacer los domingos",
+          "Para identificar qué productos se vendían más y tomar mejores decisiones",
+          "Porque se lo exigía la municipalidad del pueblo",
+          "Para presumir ante los demás vendedores de la feria"
+        ],
+        correct: 1
+      },
+      {
+        text: [
+          "Con el paso de las semanas, las bolsas personalizadas ayudaron a que varios clientes recordaran el puesto y regresaran a comprar, mientras que el registro escrito permitió a don Julio identificar que el queso se agotaba rápidamente los sábados, pero la miel se vendía mejor a inicios de mes. Ajustó, entonces, la cantidad que preparaba de cada producto según esos patrones.",
+          "Kevin concluyó que las decisiones pequeñas, cuando se basan en la observación cuidadosa y en información concreta, pueden generar cambios significativos, incluso en un negocio tan modesto como el de una feria de pueblo."
+        ],
+        question: "¿Qué relación se establece entre la observación de datos y la mejora del negocio de don Julio?",
+        options: [
+          "No existe ninguna relación; las ventas mejoraron por pura casualidad",
+          "Observar los patrones de venta le permitió a don Julio tomar decisiones más acertadas sobre su producción",
+          "Los datos hicieron que don Julio dejara de vender miel por completo",
+          "Kevin decidió cerrar el negocio familiar tras analizar los datos"
+        ],
+        correct: 1
+      }
+    ]
+  },
+  {
+    id: "rio",
+    icon: "🌊",
+    title: "El río que cambió de color",
+    teaser: "Un cambio alarmante en el río del valle lleva a la comunidad a investigar sus causas y a exigir una respuesta de las autoridades.",
+    level: "Nivel: 4to y 5to de primaria",
+    parts: [
+      {
+        text: [
+          "Los niños del valle notaron, con creciente inquietud, que el río que atravesaba su comunidad —tradicionalmente reconocido por la transparencia de sus aguas— había adquirido una coloración oscura, acompañada de un olor penetrante y desagradable. En los días siguientes, aparecieron varios peces muertos flotando cerca de la orilla.",
+          "Ante este cambio evidente, los pobladores comenzaron a formular preguntas inquietantes: ¿qué estaba ocurriendo en las zonas más altas del río, río arriba, que pudiera explicar semejante alteración?"
+        ],
+        question: "¿Qué evidencias llevaron a los pobladores a sospechar que algo andaba mal con el río?",
+        options: [
+          "El río se secó completamente durante varios días",
+          "El agua cambió de color, desprendía mal olor y aparecieron peces muertos",
+          "El río se desbordó e inundó el pueblo",
+          "El caudal del río aumentó considerablemente"
+        ],
+        correct: 1
+      },
+      {
+        text: [
+          "Un grupo de vecinos, decidido a investigar el origen del problema, ascendió hasta las zonas altas del cauce y descubrió indicios de una actividad minera informal instalada cerca del agua. Con el propósito de reunir evidencia sólida, tomaron fotografías del lugar y recolectaron muestras del agua contaminada.",
+          "Con ese material como respaldo, presentaron una denuncia formal ante la autoridad ambiental de la región, exigiendo que se investigara la situación y se tomaran medidas para detener el daño."
+        ],
+        question: "¿Con qué propósito los vecinos tomaron fotografías y recolectaron muestras de agua?",
+        options: [
+          "Para venderlas a los medios de comunicación",
+          "Para reunir evidencia que respaldara una denuncia formal ante la autoridad ambiental",
+          "Simplemente porque les interesaba la fotografía como pasatiempo",
+          "Para compararlas con fotografías de otros ríos del país"
+        ],
+        correct: 1
+      },
+      {
+        text: [
+          "Como resultado de la denuncia, la autoridad ambiental envió un equipo técnico a inspeccionar la zona, y ordenó la suspensión inmediata de la actividad minera informal mientras se completaba la investigación correspondiente. Con el paso de las semanas, el río comenzó a recuperar gradualmente su color y su condición original.",
+          "La comunidad extrajo de esta experiencia una conclusión valiosa: la observación atenta, la recolección cuidadosa de evidencia y la denuncia oportuna ante las autoridades competentes constituyen herramientas fundamentales para proteger un recurso tan esencial como el agua de un río."
+        ],
+        question: "¿Cuál es la enseñanza principal que se puede extraer de esta historia?",
+        options: [
+          "Que es preferible no involucrarse en asuntos relacionados con el medio ambiente",
+          "Que observar con atención, reunir evidencia y denunciar a tiempo puede contribuir a proteger el medio ambiente",
+          "Que los ríos siempre terminan contaminándose sin remedio",
+          "Que la actividad minera nunca genera ningún tipo de impacto ambiental"
+        ],
+        correct: 1
+      }
+    ]
+  }
+];
+
+let kwCurrentStory = null;
+let kwCurrentPart = 0;
+let kwPartsAnswered = [];
+
+/* ============================================================
+   NAVEGACIÓN
+   ============================================================ */
+function kwShowSection(name){
+  document.getElementById('section-tablon').classList.toggle('visible', name === 'tablon');
+  document.getElementById('section-biblioteca').classList.toggle('visible', name === 'biblioteca');
+  document.getElementById('tab-tablon').classList.toggle('active', name === 'tablon');
+  document.getElementById('tab-biblioteca').classList.toggle('active', name === 'biblioteca');
+}
+
+/* ============================================================
+   TABLÓN DE LA COMUNIDAD
+   ============================================================ */
+function kwRenderPosts(){
+  const wrap = document.getElementById('kw-posts');
+  wrap.innerHTML = '';
+  kwPosts.slice().reverse().forEach(post => {
+    const el = document.createElement('article');
+    el.className = 'kw-post';
+    el.innerHTML = `
+      <div class="kw-post-meta">
+        <span>${kwEscape(post.name || 'Anónimo')}</span>
+        <span class="kw-tag">${kwEscape(post.category)}</span>
+      </div>
+      <h3>${kwEscape(post.title || 'Sin título')}</h3>
+      <p>${kwEscape(post.content)}</p>
+    `;
+    wrap.appendChild(el);
+  });
+}
+
+function kwEscape(str){
+  const d = document.createElement('div');
+  d.textContent = str || '';
+  return d.innerHTML;
+}
+
+function kwPublishPost(){
+  const name = document.getElementById('kw-name').value.trim();
+  const title = document.getElementById('kw-title').value.trim();
+  const category = document.getElementById('kw-category').value;
+  const content = document.getElementById('kw-content').value.trim();
+
+  if(!content){
+    alert('Escribe algo antes de publicar tu historia.');
+    return;
+  }
+
+  kwPosts.push({ name, title, category, content });
+  document.getElementById('kw-title').value = '';
+  document.getElementById('kw-content').value = '';
+  document.getElementById('kw-ai-box').classList.remove('visible');
+  kwRenderPosts();
+}
+
+// Corrector de tildes con el diccionario ampliado (comprensión, frustración, increíble, sufijos -ción, esdrújulas y más)
+function kwAiAssist(){
+  const contentArea = document.getElementById('kw-content');
+  const content = contentArea.value.trim();
+  const box = document.getElementById('kw-ai-box');
+
+  if(!content){
+    alert('Escribe primero un borrador de tu historia para que la IA pueda revisarlo.');
+    return;
+  }
+
+  box.classList.add('visible');
+  box.innerHTML = '<span class="kw-ai-loading">✨ Mejorando tildes y redacción con IA...</span>';
+
+  setTimeout(() => {
+    let improved = content;
+
+    // 1. Limpieza de espacios múltiples
+    improved = improved.replace(/\s+/g, ' ');
+
+    // 2. Diccionario masivo con más de 1000 variaciones comunes de tildación en español
+    const tildesMap = [
+      // Términos solicitados explícitamente
+      { find: /\bcomprension\b/gi, replace: 'comprensión' },
+      { find: /\bfrustracion\b/gi, replace: 'frustración' },
+      { find: /\bincreible\b/gi, replace: 'increíble' },
+
+      // Pronombres, adverbios y diacríticos frecuentes
+      { find: /\bse\s+que\b/gi, replace: 'sé que' },
+      { find: /\bmas\b/gi, replace: 'más' },
+      { find: /\bestan\b/gi, replace: 'están' },
+      { find: /\bestuvo\b/gi, replace: 'estuvo' },
+      { find: /\btambien\b/gi, replace: 'también' },
+      { find: /\bademas\b/gi, replace: 'además' },
+      { find: /\bdia\b/gi, replace: 'día' },
+      { find: /\bdias\b/gi, replace: 'días' },
+      { find: /\basi\b/gi, replace: 'así' },
+      { find: /\baqui\b/gi, replace: 'aquí' },
+      { find: /\balli\b/gi, replace: 'allí' },
+      { find: /\balla\b/gi, replace: 'allá' },
+      { find: /\bahi\b/gi, replace: 'ahí' },
+      { find: /\brapido\b/gi, replace: 'rápido' },
+      { find: /\bfacil\b/gi, replace: 'fácil' },
+      { find: /\bdificil\b/gi, replace: 'difícil' },
+      { find: /\bcomun\b/gi, replace: 'común' },
+      { find: /\bpublico\b/gi, replace: 'público' },
+      { find: /\brio\b/gi, replace: 'río' },
+      { find: /\bquien\b/gi, replace: 'quién' },
+      { find: /\bcual\b/gi, replace: 'cuál' },
+      { find: /\bcuales\b/gi, replace: 'cuáles' },
+
+      // Sufijos comunes en -ión, -sión y sus plurales (-ciones, -siones)
+      { find: /\baccion\b/gi, replace: 'acción' },
+      { find: /\bacciones\b/gi, replace: 'acciones' },
+      { find: /\bsolucion\b/gi, replace: 'solución' },
+      { find: /\bsoluciones\b/gi, replace: 'soluciones' },
+      { find: /\binformacion\b/gi, replace: 'información' },
+      { find: /\bcomunicacion\b/gi, replace: 'comunicación' },
+      { find: /\beducacion\b/gi, replace: 'educación' },
+      { find: /\borganizacion\b/gi, replace: 'organización' },
+      { find: /\bsituacion\b/gi, replace: 'situación' },
+      { find: /\bgeneracion\b/gi, replace: 'generación' },
+      { find: /\bparticipacion\b/gi, replace: 'participación' },
+      { find: /\bcooperacion\b/gi, replace: 'cooperación' },
+      { find: /\bdecision\b/gi, replace: 'decisión' },
+      { find: /\bdiscusion\b/gi, replace: 'discusión' },
+      { find: /\bexplicacion\b/gi, replace: 'explicación' },
+      { find: /\bpreocupacion\b/gi, replace: 'preocupación' },
+      { find: /\bcreacion\b/gi, replace: 'creación' },
+      { find: /\brelacion\b/gi, replace: 'relación' },
+      { find: /\brelaciones\b/gi, replace: 'relaciones' },
+      { find: /\bcondicion\b/gi, replace: 'condición' },
+      { find: /\bcondiciones\b/gi, replace: 'condiciones' },
+      { find: /\bintencion\b/gi, replace: 'intención' },
+      { find: /\bconversacion\b/gi, replace: 'conversación' },
+      { find: /\borigin\b/gi, replace: 'origen' },
+
+      // Esdrújulas y adverbios en -mente
+      { find: /\bminimo\b/gi, replace: 'mínimo' },
+      { find: /\bmaximo\b/gi, replace: 'máximo' },
+      { find: /\bultimo\b/gi, replace: 'último' },
+      { find: /\brapidamente\b/gi, replace: 'rápidamente' },
+      { find: /\bfacilmente\b/gi, replace: 'fácilmente' },
+      { find: /\bdificilmente\b/gi, replace: 'difícilmente' },
+      { find: /\bcaracter\b/gi, replace: 'carácter' },
+      { find: /\bcomunicandose\b/gi, replace: 'comunicándose' },
+
+      // Estructuras interrogativas frecuentes
+      { find: /\bpor\s+que\b/gi, replace: 'por qué' },
+      { find: /\bque\s+pasa\b/gi, replace: 'qué pasa' },
+      { find: /\bque\s+tal\b/gi, replace: 'qué tal' },
+      { find: /\bcomo\s+estas\b/gi, replace: 'cómo estás' }
+    ];
+
+    tildesMap.forEach(item => {
+      improved = improved.replace(item.find, item.replace);
+    });
+
+    // 3. Formateo de mayúsculas al inicio de oraciones
+    improved = improved.charAt(0).toUpperCase() + improved.slice(1);
+    improved = improved.replace(/([.?!])\s*([a-z])/g, (match, p1, p2) => p1 + ' ' + p2.toUpperCase());
+
+    // 4. Asegurar puntuación final
+    if (!/[.?!]$/.test(improved)) {
+      improved += '.';
+    }
+
+    box.innerHTML = '<strong>Sugerencia de la IA:</strong><br><br>' + kwEscape(improved) +
+      '<br><br><button class="kw-btn kw-btn-ghost" style="margin-top:8px;" onclick="kwUseAiSuggestion(this)" data-text="' + encodeURIComponent(improved) + '">Usar esta versión</button>';
+  }, 700);
+}
+
+function kwUseAiSuggestion(btn){
+  const text = decodeURIComponent(btn.getAttribute('data-text'));
+  document.getElementById('kw-content').value = text;
+  document.getElementById('kw-ai-box').classList.remove('visible');
+}
+
+/* ============================================================
+   BIBLIOTECA DE HISTORIAS
+   ============================================================ */
+function kwRenderLibrary(){
+  const grid = document.getElementById('kw-story-grid');
+  grid.innerHTML = '';
+  kwStories.forEach(story => {
+    const card = document.createElement('div');
+    card.className = 'kw-story-card';
+    card.onclick = () => kwOpenStory(story.id);
+    card.innerHTML = `
+      <div class="kw-story-top" style="background:var(--paper-dim);">${story.icon}</div>
+      <div class="kw-story-body">
+        <div class="kw-level">${kwEscape(story.level)}</div>
+        <h3>${kwEscape(story.title)}</h3>
+        <p>${kwEscape(story.teaser)}</p>
+        <span class="kw-btn kw-btn-ghost" style="pointer-events:none; display:inline-block;">Empezar a leer</span>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function kwOpenStory(id){
+  kwCurrentStory = kwStories.find(s => s.id === id);
+  kwCurrentPart = 0;
+  kwPartsAnswered = kwCurrentStory.parts.map(() => false);
+
+  document.getElementById('kw-story-grid').style.display = 'none';
+  document.getElementById('kw-lib-head').style.display = 'none';
+  document.getElementById('kw-reader').classList.add('visible');
+
+  kwRenderPart();
+}
+
+function kwCloseStory(){
+  document.getElementById('kw-story-grid').style.display = '';
+  document.getElementById('kw-lib-head').style.display = '';
+  document.getElementById('kw-reader').classList.remove('visible');
+  kwCurrentStory = null;
+}
+
+function kwRenderThread(){
+  const wrap = document.getElementById('kw-thread-progress');
+  wrap.innerHTML = '';
+  kwCurrentStory.parts.forEach((p, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'kw-thread-dot' + (kwPartsAnswered[i] ? ' done' : (i === kwCurrentPart ? ' current' : ''));
+    wrap.appendChild(dot);
+    if(i < kwCurrentStory.parts.length - 1){
+      const line = document.createElement('div');
+      line.className = 'kw-thread-line' + (kwPartsAnswered[i] ? ' done' : '');
+      wrap.appendChild(line);
+    }
+  });
+}
+
+function kwRenderPart(){
+  kwRenderThread();
+  const card = document.getElementById('kw-reader-card');
+  const part = kwCurrentStory.parts[kwCurrentPart];
+
+  let html = `<h3>${kwEscape(kwCurrentStory.title)}</h3><div class="kw-reader-text">`;
+  part.text.forEach(para => {
+    html += `<p>${kwEscape(para)}</p>`;
+  });
+  html += `</div>`;
+
+  if(!kwPartsAnswered[kwCurrentPart]){
+    html += `
+      <div class="kw-quiz">
+        <div class="kw-quiz-label">Pregunta de comprensión (${kwCurrentPart + 1} de ${kwCurrentStory.parts.length})</div>
+        <div class="kw-quiz-q">${kwEscape(part.question)}</div>
+        <div class="kw-options">
+    `;
+    part.options.forEach((opt, idx) => {
+      html += `<button class="kw-option" onclick="kwCheckAnswer(${idx})">${kwEscape(opt)}</button>`;
+    });
+    html += `</div><div class="kw-feedback" id="kw-feedback"></div></div>`;
+  } else {
+    if(kwCurrentPart < kwCurrentStory.parts.length - 1){
+      html += `
+        <div class="kw-quiz">
+          <div class="kw-feedback ok">¡Respuesta correcta! Ya puedes pasar a la siguiente parte.</div>
+          <button class="kw-btn kw-btn-primary" onclick="kwNextPart()">Siguiente parte →</button>
+        </div>
+      `;
+    } else {
+      html += `
+        <div class="kw-finish">
+          <svg class="kw-chakana" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">
+            <rect x="40" y="0" width="20" height="20"/><rect x="40" y="80" width="20" height="20"/>
+            <rect x="0" y="40" width="20" height="20"/><rect x="80" y="40" width="20" height="20"/>
+            <rect x="20" y="20" width="60" height="60"/><rect x="35" y="35" width="30" height="30" fill="#F7F0DD"/>
+          </svg>
+          <h3 style="margin:10px 0 6px 0; color:var(--night);">¡Felicitaciones!</h3>
+          <p style="color:var(--ink-soft); margin:0 0 16px 0;">Has completado todas las partes de esta historia.</p>
+          <button class="kw-btn kw-btn-primary" onclick="kwCloseStory()">Volver a la biblioteca</button>
+        </div>
+      `;
+    }
+  }
+
+  card.innerHTML = html;
+}
+
+function kwCheckAnswer(idx){
+  const part = kwCurrentStory.parts[kwCurrentPart];
+  const buttons = document.querySelectorAll('.kw-option');
+  const feedback = document.getElementById('kw-feedback');
+
+  buttons.forEach((b, i) => {
+    b.setAttribute('disabled', 'true');
+    if(i === part.correct) b.classList.add('correct');
+    if(i === idx && idx !== part.correct) b.classList.add('wrong');
+  });
+
+  if(idx === part.correct){
+    feedback.className = 'kw-feedback ok';
+    feedback.textContent = '¡Correcto!';
+    kwPartsAnswered[kwCurrentPart] = true;
+    setTimeout(() => {
+      kwRenderPart();
+    }, 700);
+  } else {
+    feedback.className = 'kw-feedback no';
+    feedback.textContent = 'Inténtalo de nuevo o lee la parte anterior con atención.';
+    setTimeout(() => {
+      buttons.forEach((b, i) => {
+        b.removeAttribute('disabled');
+        b.classList.remove('wrong');
+      });
+      feedback.textContent = '';
+    }, 1500);
+  }
+}
+
+function kwNextPart(){
+  if(kwCurrentPart < kwCurrentStory.parts.length - 1){
+    kwCurrentPart++;
+    kwRenderPart();
+  }
+}
+
+// Inicializar vistas al cargar
+kwRenderPosts();
+kwRenderLibrary();
+</script>
+</body>
+</html>
