@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yachay Wasi — Historias que tejen comunidad</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --night:#1B2A4A;
+    --night-soft:#2C3F66;
+    --gold:#D9A441;
+    --gold-soft:#F0CE84;
+    --clay:#B54834;
+    --green:#3F5C44;
+    --paper:#F7F0DD;
+    --paper-dim:#EFE4C8;
+    --ink:#2B241C;
+    --ink-soft:#5A5142;
+    --radius:14px;
+    --shadow: 0 8px 24px rgba(27,42,74,0.12);
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;}
+  .kw-root{
+    font-family:'Work Sans', sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    min-height:100vh;
+  }
+  .kw-root h1, .kw-root h2, .kw-root h3, .kw-root .kw-display{
+    font-family:'Fraunces', serif;
+  }
+
+  /* ---------- Header ---------- */
+  .kw-header{
+    background: linear-gradient(180deg, var(--night) 0%, var(--night-soft) 100%);
+    color:var(--paper);
+    padding:36px 20px 0 20px;
+    position:relative;
+    overflow:hidden;
+  }
+  .kw-header-inner{
+    max-width:960px;
+    margin:0 auto;
+    text-align:center;
+    padding-bottom:28px;
+  }
+  .kw-logo-row{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    margin-bottom:6px;
+  }
+  .kw-chakana{
+    width:30px;height:30px;
+    color:var(--gold);
+  }
+  .kw-brand{
+    font-size:clamp(2.2rem, 6vw, 3.2rem);
+    font-weight:700;
+    letter-spacing:0.5px;
+    margin:0;
+    color:var(--paper);
+  }
+  .kw-slogan{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:500;
+    color:var(--gold-soft);
+    font-size:clamp(1rem, 2.4vw, 1.25rem);
+    margin:6px 0 0 0;
+  }
+  .kw-thread{
+    display:block;
+    width:100%;
+    height:34px;
+  }
+
+  /* ---------- Nav ---------- */
+  .kw-nav{
+    max-width:960px;
+    margin:-1px auto 0 auto;
+    display:flex;
+    justify-content:center;
+    gap:8px;
+    padding:0 20px;
+    transform:translateY(-18px);
+  }
+  .kw-tab{
+    font-family:'Work Sans', sans-serif;
+    font-weight:600;
+    font-size:0.95rem;
+    background:var(--paper);
+    color:var(--night);
+    border:2px solid var(--night);
+    padding:12px 22px;
+    border-radius:999px;
+    cursor:pointer;
+    box-shadow:var(--shadow);
+    transition:transform .15s ease, background .15s ease, color .15s ease;
+  }
+  .kw-tab:hover{ transform:translateY(-2px); }
+  .kw-tab.active{
+    background:var(--clay);
+    border-color:var(--clay);
+    color:#fff;
+  }
+
+  .kw-main{
+    max-width:960px;
+    margin:0 auto;
+    padding:20px 20px 80px 20px;
+  }
+  .kw-section{ display:none; animation:kwFade .35s ease; }
+  .kw-section.visible{ display:block; }
+  @keyframes kwFade{ from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);} }
+
+  .kw-section-head{ margin-bottom:18px; }
+  .kw-section-head h2{
+    font-size:1.6rem;
+    margin:0 0 6px 0;
+    color:var(--night);
+  }
+  .kw-section-head p{
+    margin:0;
+    color:var(--ink-soft);
+    line-height:1.5;
+    max-width:640px;
+  }
+
+  /* ---------- Community board ---------- */
+  .kw-card{
+    background:#fff;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:22px;
+    margin-bottom:20px;
+    border:1px solid rgba(27,42,74,0.06);
+  }
+  .kw-field{ margin-bottom:14px; }
+  .kw-field label{
+    display:block;
+    font-weight:600;
+    font-size:0.88rem;
+    margin-bottom:6px;
+    color:var(--night);
+  }
+  .kw-field input, .kw-field select, .kw-field textarea{
+    width:100%;
+    font-family:'Work Sans', sans-serif;
+    font-size:0.95rem;
+    padding:10px 12px;
+    border-radius:10px;
+    border:1.5px solid #DDD3B6;
+    background:var(--paper);
+    color:var(--ink);
+    resize:vertical;
+  }
+  .kw-field input:focus, .kw-field select:focus, .kw-field textarea:focus{
+    outline:2px solid var(--gold);
+    outline-offset:1px;
+  }
+  .kw-row{ display:flex; gap:12px; flex-wrap:wrap; }
+  .kw-row .kw-field{ flex:1; min-width:180px; }
+
+  .kw-btn{
+    font-family:'Work Sans', sans-serif;
+    font-weight:600;
+    font-size:0.92rem;
+    border:none;
+    border-radius:999px;
+    padding:11px 20px;
+    cursor:pointer;
+    transition:transform .12s ease, filter .12s ease;
+  }
+  .kw-btn:hover{ transform:translateY(-1px); filter:brightness(1.05); }
+  .kw-btn:focus-visible{ outline:3px solid var(--gold); outline-offset:2px; }
+  .kw-btn-primary{ background:var(--clay); color:#fff; }
+  .kw-btn-ghost{ background:transparent; color:var(--night); border:1.5px solid var(--night); }
+  .kw-btn-gold{ background:var(--gold); color:var(--night); }
+  .kw-btn[disabled]{ opacity:0.55; cursor:not-allowed; transform:none; }
+
+  .kw-ai-box{
+    background:var(--paper-dim);
+    border-left:4px solid var(--gold);
+    border-radius:8px;
+    padding:12px 14px;
+    margin-top:10px;
+    font-size:0.9rem;
+    line-height:1.5;
+    display:none;
+    white-space:pre-wrap;
+  }
+  .kw-ai-box.visible{ display:block; }
+  .kw-ai-loading{ color:var(--ink-soft); font-style:italic; }
+
+  .kw-posts{ display:grid; gap:16px; }
+  .kw-post{
+    background:#fff;
+    border-radius:var(--radius);
+    padding:18px;
+    box-shadow:var(--shadow);
+    border-top:4px solid var(--gold);
+  }
+  .kw-post-meta{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    margin-bottom:8px;
+    text-transform:uppercase;
+    letter-spacing:0.4px;
+  }
+  .kw-tag{
+    background:var(--night);
+    color:var(--paper);
+    padding:3px 10px;
+    border-radius:999px;
+    font-size:0.72rem;
+    font-weight:600;
+  }
+  .kw-post h3{ margin:0 0 8px 0; font-size:1.15rem; color:var(--night); }
+  .kw-post p{ margin:0; line-height:1.6; color:var(--ink); white-space:pre-wrap; }
+
+  /* ---------- Story library ---------- */
+  .kw-story-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));
+    gap:18px;
+  }
+  .kw-story-card{
+    background:#fff;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    overflow:hidden;
+    cursor:pointer;
+    border:1px solid rgba(27,42,74,0.06);
+    transition:transform .15s ease;
+  }
+  .kw-story-card:hover{ transform:translateY(-3px); }
+  .kw-story-top{
+    height:86px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:2.1rem;
+  }
+  .kw-story-body{ padding:16px; }
+  .kw-story-body h3{ margin:0 0 6px 0; font-size:1.1rem; color:var(--night); }
+  .kw-story-body p{ margin:0 0 10px 0; font-size:0.88rem; color:var(--ink-soft); line-height:1.5; }
+  .kw-level{
+    font-size:0.72rem;
+    font-weight:700;
+    letter-spacing:0.4px;
+    text-transform:uppercase;
+    color:var(--clay);
+  }
+
+  /* ---------- Reader ---------- */
+  .kw-reader{ display:none; }
+  .kw-reader.visible{ display:block; }
+  .kw-reader-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:14px;
+  }
+  .kw-thread-progress{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    margin:0 auto 22px auto;
+    max-width:420px;
+  }
+  .kw-thread-dot{
+    width:16px; height:16px;
+    border-radius:50%;
+    background:#DDD3B6;
+    border:2px solid #DDD3B6;
+    flex-shrink:0;
+    transition:background .2s, border-color .2s;
+  }
+  .kw-thread-dot.done{ background:var(--green); border-color:var(--green); }
+  .kw-thread-dot.current{ background:var(--gold); border-color:var(--clay); box-shadow:0 0 0 4px rgba(217,164,65,0.25); }
+  .kw-thread-line{ flex:1; height:3px; background:#DDD3B6; border-radius:2px; }
+  .kw-thread-line.done{ background:var(--green); }
+
+  .kw-reader-card{
+    background:#fff;
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:26px;
+  }
+  .kw-reader-card h3{ margin-top:0; color:var(--night); }
+  .kw-reader-text{ font-size:1.08rem; line-height:1.75; color:var(--ink); }
+  .kw-reader-text p{ margin:0 0 12px 0; }
+
+  .kw-quiz{
+    margin-top:20px;
+    padding-top:18px;
+    border-top:2px dashed #DDD3B6;
+  }
+  .kw-quiz-label{
+    font-weight:700;
+    color:var(--clay);
+    font-size:0.85rem;
+    text-transform:uppercase;
+    letter-spacing:0.4px;
+    margin-bottom:10px;
+  }
+  .kw-quiz-q{ font-weight:600; margin-bottom:12px; font-size:1.02rem; }
+  .kw-options{ display:grid; gap:10px; margin-bottom:14px; }
+  .kw-option{
+    text-align:left;
+    background:var(--paper);
+    border:1.5px solid #DDD3B6;
+    border-radius:10px;
+    padding:12px 14px;
+    font-family:'Work Sans', sans-serif;
+    font-size:0.95rem;
+    cursor:pointer;
+    transition:border-color .15s, background .15s;
+  }
+  .kw-option:hover{ border-color:var(--gold); }
+  .kw-option.correct{ background:#E4EFE3; border-color:var(--green); }
+  .kw-option.wrong{ background:#F5DEDA; border-color:var(--clay); }
+  .kw-option[disabled]{ cursor:default; }
+  .kw-feedback{ font-size:0.92rem; margin-bottom:10px; min-height:1.2em; }
+  .kw-feedback.ok{ color:var(--green); font-weight:600; }
+  .kw-feedback.no{ color:var(--clay); font-weight:600; }
+
+  .kw-finish{
+    text-align:center;
+    padding:30px 20px;
+  }
+  .kw-finish .kw-chakana{ width:46px; height:46px; margin-bottom:10px; }
+
+  @media (max-width:520px){
+    .kw-row{ flex-direction:column; }
+    .kw-reader-card{ padding:18px; }
+  }
+
+  .kw-visually-hidden{
+    position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0);
+  }
+</style>
+</head>
+<body>
+<div class="kw-root">
+
+  <header class="kw-header">
+    <div class="kw-header-inner">
+      <div class="kw-logo-row">
+        <svg class="kw-chakana" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">
+          <path d="M40 0h20v20h20v20h20v20H80v20H60v20H40V80H20V60H0V40h20V20h20V0z" opacity="0"/>
+          <g>
+            <rect x="40" y="0" width="20" height="20"/>
+            <rect x="40" y="80" width="20" height="20"/>
+            <rect x="0" y="40" width="20" height="20"/>
+            <rect x="80" y="40" width="20" height="20"/>
+            <rect x="20" y="20" width="60" height="60"/>
+            <rect x="35" y="35" width="30" height="30" fill="#1B2A4A"/>
+          </g>
+        </svg>
+        <h1 class="kw-brand">Yachay Wasi</h1>
+      </div>
+      <p class="kw-slogan">Historias que tejen comunidad</p>
+    </div>
+    <svg class="kw-thread" viewBox="0 0 960 34" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,10 Q 120,34 240,10 T 480,10 T 720,10 T 960,10 V34 H0 Z" fill="#F7F0DD"></path>
+      <path d="M0,10 Q 120,34 240,10 T 480,10 T 720,10 T 960,10" fill="none" stroke="#D9A441" stroke-width="2" opacity="0.6"></path>
+    </svg>
+  </header>
+
+  <nav class="kw-nav">
+    <button class="kw-tab active" id="tab-tablon" onclick="kwShowSection('tablon')">Tablón de la comunidad</button>
+    <button class="kw-tab" id="tab-biblioteca" onclick="kwShowSection('biblioteca')">Biblioteca de historias</button>
+  </nav>
+
+  <main class="kw-main">
+
+    <section class="kw-section visible" id="section-tablon">
+      <div class="kw-section-head">
+        <h2>Comparte lo que vive tu comunidad</h2>
+        <p>Escribe un cuento, una historia real o una situación que tu comunidad está enfrentando. Haz clic en el botón para mejorar tu texto con IA.</p>
+      </div>
+
+      <div class="kw-card">
+        <div class="kw-field">
+          <label for="kw-name">Tu nombre</label>
+          <input type="text" id="kw-name" placeholder="¿Cómo te llamas?">
+        </div>
+        <div class="kw-row">
+          <div class="kw-field">
+            <label for="kw-title">Título de tu historia</label>
+            <input type="text" id="kw-title" placeholder="Dale un título">
+          </div>
+          <div class="kw-field">
+            <label for="kw-category">Categoría</label>
+            <select id="kw-category">
+              <option value="Cuento">Cuento</option>
+              <option value="Historia real">Historia real</option>
+              <option value="Situación de la comunidad">Situación de la comunidad</option>
+            </select>
+          </div>
+        </div>
+        <div class="kw-field">
+          <label for="kw-content">Escribe aquí</label>
+          <textarea id="kw-content" rows="6" placeholder="Cuenta tu historia con tus propias palabras..."></textarea>
+        </div>
+
+        <div style="display:flex; gap:10px; flex-wrap:wrap;">
+          <button class="kw-btn kw-btn-gold" onclick="kwAiAssist()">✨ Mejorar con IA</button>
+          <button class="kw-btn kw-btn-primary" onclick="kwPublishPost()">Publicar en el tablón</button>
+        </div>
+
+        <div class="kw-ai-box" id="kw-ai-box"></div>
+      </div>
+
+      <div class="kw-posts" id="kw-posts"></div>
+    </section>
+
+    <section class="kw-section" id="section-biblioteca">
+      <div class="kw-section-head" id="kw-lib-head">
+        <h2>Elige una historia para leer</h2>
+        <p>Cada historia se lee por partes. Antes de seguir a la siguiente parte, responde una pregunta corta. Las primeras preguntas son fáciles y van subiendo un poco de nivel.</p>
+      </div>
+
+      <div class="kw-story-grid" id="kw-story-grid"></div>
+
+      <div class="kw-reader" id="kw-reader">
+        <div class="kw-reader-head">
+          <button class="kw-btn kw-btn-ghost" onclick="kwCloseStory()">← Volver a la biblioteca</button>
+        </div>
+        <div id="kw-thread-progress" class="kw-thread-progress"></div>
+        <div class="kw-reader-card" id="kw-reader-card"></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+/* ============================================================
+   ESTADO
+   ============================================================ */
+let kwPosts = [
+  {
+    name: "Rosa M.",
+    title: "El pozo que arreglamos entre todos",
+    category: "Historia real",
+    content: "En mi comunidad el pozo de agua estaba roto hace meses. Un día nos juntamos los vecinos, cada uno trajo lo que pudo: dinero, herramientas o comida para los que trabajaban. En dos fines de semana el pozo volvió a funcionar. Aprendí que cuando nos unimos, los problemas grandes se hacen más pequeños."
+  },
+  {
+    name: "Julio C.",
+    title: "Mi abuelo y las semillas de siempre",
+    category: "Cuento",
+    content: "Mi abuelo guarda semillas de papa en una bolsa de tela desde hace treinta años. Dice que cada semilla tiene una historia: una sequía que sobrevivió, una helada que resistió. Ahora yo también guardo mis propias semillas, para seguir contando esa historia."
+  }
+];
+
+const kwStories = [
+  {
+    id: "agua",
+    icon: "💧",
+    title: "El agua que no llega",
+    teaser: "En Chaqllas el agua solo llega algunos días. Mariana busca una solución.",
+    level: "Nivel: fácil",
+    parts: [
+      {
+        text: [
+          "En el pueblo de Chaqllas, el agua solo llega dos veces por semana. Mariana se levanta muy temprano, antes de que salga el sol, para ir con su mamá a llenar baldes en el caño del centro del pueblo.",
+          "Si no llegan temprano, el agua se corta y tienen que esperar hasta el otro día."
+        ],
+        question: "¿Por qué Mariana se levanta muy temprano?",
+        options: [
+          "Para ir a jugar con sus amigas",
+          "Para buscar agua antes de que se corte",
+          "Para ayudar a vender pan",
+          "Para ir a la escuela"
+        ],
+        correct: 1
+      },
+      {
+        text: [
+          "Un día, Mariana ve que uno de los tubos viejos está roto y pierde mucha agua en el camino. Se lo cuenta a su mamá, y su mamá le dice que eso se puede conversar en la próxima asamblea comunal.",
+          "Mariana decide ir a la asamblea con su mamá y levantar la mano para hablar sobre el tubo roto."
+        ],
+        question: "¿Por qué crees que Mariana decide hablar en la asamblea?",
+        options: [
+          "Porque quiere ser la presidenta del pueblo",
+          "Porque le gusta hablar en público",
+          "Porque quiere ayudar a resolver el problema del agua",
+          "Porque su mamá la obligó a ir"
+        ],
+        correct: 2
+      },
+      {
+        text: [
+          "La comunidad decide juntar dinero entre todos para arreglar los tubos rotos. Un ingeniero que vive cerca ayuda sin cobrar. Después de tres semanas de trabajo, el agua empieza a llegar de forma más regular.",
+          "Mariana entiende que un solo problema, resuelto entre todos, se vuelve más fácil de cargar."
+        ],
+        question: "¿Cuál es la idea principal de esta historia?",
+        options: [
+          "Nunca hay solución para los problemas del agua",
+          "La unión de la comunidad puede resolver problemas grandes",
+          "Es mejor no hablar en las asambleas",
+          "El agua no es importante para el pueblo"
+        ],
+        correct: 1
+      }
+    ]
+  },
+  {
+    id: "chacra",
+    icon: "🌽",
+    title: "La chacra de la abuela",
+    teaser: "La abuela Eusebia conoce secretos para sembrar incluso en años de sequía.",
+    level: "Nivel: fácil",
+    parts: [
+      {
+        text: [
+          "La abuela Eusebia tiene una chacra pequeña donde siembra papa, quinua y tarwi. Su nieto Tomás la visita cada fin de semana para ayudarla a sembrar y aprender de ella.",
+          "Este año no ha llovido mucho, y Tomás está preocupado porque las plantas necesitan agua."
+        ],
+        question: "¿Qué cultiva la abuela Eusebia en su chacra?",
+        options: [
+          "Papa, quinua y tarwi",
+          "Solo flores",
+          "Café y cacao",
+          "Arroz y maíz de la costa"
+        ],
+        correct: 0
+      },
+      {
+        text: [
+          "La abuela le explica a Tomás que la quinua y el tarwi resisten mejor la falta de agua que otras plantas, porque son cultivos que sus antepasados usaban en años difíciles.",
+          "Ella decide sembrar más quinua este año, y menos papa, para no perder toda la cosecha."
+        ],
+        question: "¿Por qué la abuela decide sembrar más quinua este año?",
+        options: [
+          "Porque la quinua se vende más cara",
+          "Porque resiste mejor la sequía que otras plantas",
+          "Porque a Tomás le gusta más la quinua",
+          "Porque ya no le gusta sembrar papa"
+        ],
+        correct: 1
+      },
+      {
+        text: [
+          "Con el paso de los meses, la chacra de la abuela da una buena cosecha, aunque los vecinos que solo sembraron papa pierden gran parte de la suya. La abuela comparte semillas de quinua con ellos para el próximo año.",
+          "Tomás aprende que el conocimiento antiguo, unido a la generosidad, puede ayudar a toda una comunidad."
+        ],
+        question: "¿Qué mensaje deja esta historia?",
+        options: [
+          "El conocimiento antiguo puede ayudar a enfrentar problemas actuales",
+          "Es mejor no compartir las semillas con nadie",
+          "La papa siempre es mejor que la quinua",
+          "Sembrar no sirve de nada en años de sequía"
+        ],
+        correct: 0
+      }
+    ]
+  },
+  {
+    id: "camino",
+    icon: "🎒",
+    title: "El camino a la escuela",
+    teaser: "Rosa camina dos horas para llegar a clases. ¿Podrá seguir estudiando?",
+    level: "Nivel: fácil-medio",
+    parts: [
+      {
+        text: [
+          "Rosa tiene doce años y camina dos horas cada mañana para llegar a la escuela. En época de lluvia, el camino se llena de barro y a veces llega tarde.",
+          "Su papá le dice que quizás sea mejor que deje la escuela por un tiempo, hasta que mejore el camino."
+        ],
+        question: "¿Cuánto tiempo camina Rosa para llegar a la escuela?",
+        options: [
+          "Media hora",
+          "Dos horas",
+          "Diez minutos",
+          "Un día completo"
+        ],
+        correct: 1
+      },
+      {
+        text: [
+          "Rosa no quiere dejar de estudiar. Habla con su profesora, quien decide conversar con otros padres de familia sobre el problema del camino y las llegadas tarde.",
+          "Entre todos, deciden pedir apoyo a la municipalidad para conseguir una movilidad compartida para los niños que viven lejos."
+        ],
+        question: "¿Qué decide hacer la profesora al enterarse del problema?",
+        options: [
+          "Decirle a Rosa que ya no puede estudiar",
+          "Ignorar el problema",
+          "Hablar con los padres de familia para buscar una solución",
+          "Cambiarse de escuela"
+        ],
+        correct: 2
+      },
+      {
+        text: [
+          "La municipalidad consigue una camioneta que pasa tres veces por semana a recoger a los niños que viven más lejos. Rosa ya no llega tarde, y puede seguir estudiando sin miedo a quedarse atrás.",
+          "Ella entiende que pedir ayuda y organizarse con otros puede abrir caminos que antes parecían cerrados."
+        ],
+        question: "¿Por qué fue importante que Rosa hablara con su profesora?",
+        options: [
+          "Porque así consiguió más tarea",
+          "Porque eso llevó a una solución que la ayudó a seguir estudiando",
+          "Porque su profesora la castigó",
+          "Porque no tenía ninguna importancia"
+        ],
+        correct: 1
+      }
+    ]
+  },
+  {
+    id: "feria",
+    icon: "🧺",
+    title: "La feria del pueblo",
+    teaser: "Don Julio y su hijo Kevin aprenden a hacer crecer su pequeño negocio.",
+    level: "Nivel: medio",
+    parts: [
+      {
+        text: [
+          "Todos los domingos, don Julio pone su puesto de quesos y miel en la feria del pueblo. Su hijo Kevin lo ayuda a acomodar los productos desde muy temprano.",
+          "Este mes, don Julio ha vendido menos que de costumbre y está un poco preocupado."
+        ],
+        question: "¿Qué vende don Julio en la feria?",
+        options: [
+          "Ropa y zapatos",
+          "Quesos y miel",
+          "Herramientas",
+          "Libros"
+        ],
+        correct: 1
+      },
+      {
+        text: [
+          "Kevin sugiere hacer pequeñas bolsas con el nombre de la familia y el nombre del pueblo, para que la gente recuerde dónde comprar la próxima vez. También propone anotar en un cuaderno cuánto se vende cada semana.",
+          "Don Julio decide probar la idea de Kevin, aunque al principio no está muy seguro de que funcione."
+        ],
+        question: "¿Para qué le sirve a don Julio anotar las ventas en un cuaderno?",
+        options: [
+          "Para saber cuánto vende cada semana y tomar mejores decisiones",
+          "Para tener algo que leer en la noche",
+          "Porque se lo pidió un vecino",
+          "Para decorar el puesto"
+        ],
+        correct: 0
+      },
+      {
+        text: [
+          "Con las bolsas nuevas y el cuaderno de ventas, algunos clientes empiezan a regresar cada semana y a recomendar el puesto a otras personas. Las ventas de don Julio mejoran poco a poco.",
+          "Kevin se da cuenta de que las ideas pequeñas, cuando se ponen en práctica, también pueden generar grandes cambios."
+        ],
+        question: "¿Qué relación hay entre las ideas de Kevin y la mejora del negocio?",
+        options: [
+          "No hay ninguna relación, fue solo suerte",
+          "Las ideas de Kevin ayudaron a que más clientes regresaran y compraran",
+          "Las ideas de Kevin hicieron que don Julio vendiera menos",
+          "Kevin decidió cerrar el negocio"
+        ],
+        correct: 1
+      }
+    ]
+  },
+  {
+    id: "rio",
+    icon: "🌊",
+    title: "El río que cambió de color",
+    teaser: "El río del valle empieza a verse extraño. La comunidad investiga qué pasa.",
+    level: "Nivel: medio",
+    parts: [
+      {
+        text: [
+          "Los niños del valle notan que el río, que siempre fue de un color claro, ahora se ve más oscuro y con un olor raro. Algunos peces han empezado a aparecer muertos en la orilla.",
+          "Los pobladores empiezan a preguntarse qué está pasando río arriba."
+        ],
+        question: "¿Qué cambio notan los niños en el río?",
+        options: [
+          "El río se secó por completo",
+          "El agua se ve más oscura y con mal olor",
+          "El río se volvió más limpio",
+          "Aparecieron muchos peces nuevos"
+        ],
+        correct: 1
+      },
+      {
+        text: [
+          "Un grupo de vecinos decide subir hasta la parte alta del río y encuentra restos de una actividad minera informal cerca del agua. Deciden tomar fotos y muestras de agua para mostrar lo que encontraron.",
+          "Con esas pruebas, llevan una denuncia a la autoridad ambiental de la zona."
+        ],
+        question: "¿Para qué toman fotos y muestras de agua los vecinos?",
+        options: [
+          "Para venderlas",
+          "Para tener pruebas que respalden su denuncia",
+          "Porque les gusta tomar fotos",
+          "Para publicarlas sin ningún motivo"
+        ],
+        correct: 1
+      },
+      {
+        text: [
+          "Gracias a la denuncia, la autoridad ambiental envía un equipo a revisar la zona y ordena detener la actividad hasta que se investigue el caso. Poco a poco, el río empieza a recuperar su color.",
+          "La comunidad aprende que observar, documentar y denunciar a tiempo puede proteger algo tan importante como su río."
+        ],
+        question: "¿Qué enseñanza principal deja esta historia?",
+        options: [
+          "Es mejor no meterse en esos temas",
+          "Observar y denunciar a tiempo puede ayudar a proteger el medio ambiente",
+          "Los ríos siempre se contaminan y no hay nada que hacer",
+          "La minería informal nunca causa problemas"
+        ],
+        correct: 1
+      }
+    ]
+  }
+];
+
+let kwCurrentStory = null;
+let kwCurrentPart = 0;
+let kwPartsAnswered = [];
+
+/* ============================================================
+   NAVEGACIÓN
+   ============================================================ */
+function kwShowSection(name){
+  document.getElementById('section-tablon').classList.toggle('visible', name === 'tablon');
+  document.getElementById('section-biblioteca').classList.toggle('visible', name === 'biblioteca');
+  document.getElementById('tab-tablon').classList.toggle('active', name === 'tablon');
+  document.getElementById('tab-biblioteca').classList.toggle('active', name === 'biblioteca');
+}
+
+/* ============================================================
+   TABLÓN DE LA COMUNIDAD
+   ============================================================ */
+function kwRenderPosts(){
+  const wrap = document.getElementById('kw-posts');
+  wrap.innerHTML = '';
+  kwPosts.slice().reverse().forEach(post => {
+    const el = document.createElement('article');
+    el.className = 'kw-post';
+    el.innerHTML = `
+      <div class="kw-post-meta">
+        <span>${kwEscape(post.name || 'Anónimo')}</span>
+        <span class="kw-tag">${kwEscape(post.category)}</span>
+      </div>
+      <h3>${kwEscape(post.title || 'Sin título')}</h3>
+      <p>${kwEscape(post.content)}</p>
+    `;
+    wrap.appendChild(el);
+  });
+}
+
+function kwEscape(str){
+  const d = document.createElement('div');
+  d.textContent = str || '';
+  return d.innerHTML;
+}
+
+function kwPublishPost(){
+  const name = document.getElementById('kw-name').value.trim();
+  const title = document.getElementById('kw-title').value.trim();
+  const category = document.getElementById('kw-category').value;
+  const content = document.getElementById('kw-content').value.trim();
+
+  if(!content){
+    alert('Escribe algo antes de publicar tu historia.');
+    return;
+  }
+
+  kwPosts.push({ name, title, category, content });
+  document.getElementById('kw-title').value = '';
+  document.getElementById('kw-content').value = '';
+  document.getElementById('kw-ai-box').classList.remove('visible');
+  kwRenderPosts();
+}
+
+// Corrector de tildes y redacción mejorado
+function kwAiAssist(){
+  const contentArea = document.getElementById('kw-content');
+  const content = contentArea.value.trim();
+  const box = document.getElementById('kw-ai-box');
+
+  if(!content){
+    alert('Escribe primero un borrador de tu historia para que la IA pueda revisarlo.');
+    return;
+  }
+
+  box.classList.add('visible');
+  box.innerHTML = '<span class="kw-ai-loading">✨ Mejorando tildes y redacción con IA...</span>';
+
+  setTimeout(() => {
+    let improved = content;
+
+    // 1. Limpieza de espacios múltiples
+    improved = improved.replace(/\s+/g, ' ');
+
+    // 2. Diccionario ampliado de palabras sin tilde comunes en español
+    const tildesMap = [
+      { find: /\bmas\b/gi, replace: 'más' },
+      { find: /\bestan\b/gi, replace: 'están' },
+      { find: /\bestuvo\b/gi, replace: 'estuvo' },
+      { find: /\btambien\b/gi, replace: 'también' },
+      { find: /\bademas\b/gi, replace: 'además' },
+      { find: /\bdia\b/gi, replace: 'día' },
+      { find: /\bdias\b/gi, replace: 'días' },
+      { find: /\basi\b/gi, replace: 'así' },
+      { find: /\brapido\b/gi, replace: 'rápido' },
+      { find: /\bfacil\b/gi, replace: 'fácil' },
+      { find: /\bdificil\b/gi, replace: 'difícil' },
+      { find: /\bcomun\b/gi, replace: 'común' },
+      { find: /\bcaracter\b/gi, replace: 'carácter' },
+      { find: /\bpublico\b/gi, replace: 'público' },
+      { find: /\brio\b/gi, replace: 'río' },
+      { find: /\bde\b/gi, replace: 'de' }, // Mantener preposición intacta
+      { find: /\bdato\b/gi, replace: 'dato' },
+      { find: /\bquien\b/gi, replace: 'quién' },
+      { find: /\bcual\b/gi, replace: 'cuál' },
+      { find: /\bque\s*\?/gi, replace: 'qué?' },
+      { find: /\bcomo\s*\?/gi, replace: 'cómo?' },
+      { find: /\bpor que\b/gi, replace: 'por qué' }
+    ];
+
+    tildesMap.forEach(item => {
+      improved = improved.replace(item.find, item.replace);
+    });
+
+    // 3. Formateo de mayúsculas al inicio de oraciones
+    improved = improved.charAt(0).toUpperCase() + improved.slice(1);
+    improved = improved.replace(/([.?!])\s*([a-z])/g, (match, p1, p2) => p1 + ' ' + p2.toUpperCase());
+
+    // 4. Asegurar puntuación final
+    if (!/[.?!]$/.test(improved)) {
+      improved += '.';
+    }
+
+    box.innerHTML = '<strong>Sugerencia de la IA:</strong><br><br>' + kwEscape(improved) +
+      '<br><br><button class="kw-btn kw-btn-ghost" style="margin-top:8px;" onclick="kwUseAiSuggestion(this)" data-text="' + encodeURIComponent(improved) + '">Usar esta versión</button>';
+  }, 700);
+}
+
+function kwUseAiSuggestion(btn){
+  const text = decodeURIComponent(btn.getAttribute('data-text'));
+  document.getElementById('kw-content').value = text;
+  document.getElementById('kw-ai-box').classList.remove('visible');
+}
+
+/* ============================================================
+   BIBLIOTECA DE HISTORIAS
+   ============================================================ */
+function kwRenderLibrary(){
+  const grid = document.getElementById('kw-story-grid');
+  grid.innerHTML = '';
+  kwStories.forEach(story => {
+    const card = document.createElement('div');
+    card.className = 'kw-story-card';
+    card.onclick = () => kwOpenStory(story.id);
+    card.innerHTML = `
+      <div class="kw-story-top" style="background:var(--paper-dim);">${story.icon}</div>
+      <div class="kw-story-body">
+        <div class="kw-level">${kwEscape(story.level)}</div>
+        <h3>${kwEscape(story.title)}</h3>
+        <p>${kwEscape(story.teaser)}</p>
+        <span class="kw-btn kw-btn-ghost" style="pointer-events:none; display:inline-block;">Empezar a leer</span>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function kwOpenStory(id){
+  kwCurrentStory = kwStories.find(s => s.id === id);
+  kwCurrentPart = 0;
+  kwPartsAnswered = kwCurrentStory.parts.map(() => false);
+
+  document.getElementById('kw-story-grid').style.display = 'none';
+  document.getElementById('kw-lib-head').style.display = 'none';
+  document.getElementById('kw-reader').classList.add('visible');
+
+  kwRenderPart();
+}
+
+function kwCloseStory(){
+  document.getElementById('kw-story-grid').style.display = '';
+  document.getElementById('kw-lib-head').style.display = '';
+  document.getElementById('kw-reader').classList.remove('visible');
+  kwCurrentStory = null;
+}
+
+function kwRenderThread(){
+  const wrap = document.getElementById('kw-thread-progress');
+  wrap.innerHTML = '';
+  kwCurrentStory.parts.forEach((p, i) => {
+    const dot = document.createElement('div');
+    dot.className = 'kw-thread-dot' + (kwPartsAnswered[i] ? ' done' : (i === kwCurrentPart ? ' current' : ''));
+    wrap.appendChild(dot);
+    if(i < kwCurrentStory.parts.length - 1){
+      const line = document.createElement('div');
+      line.className = 'kw-thread-line' + (kwPartsAnswered[i] ? ' done' : '');
+      wrap.appendChild(line);
+    }
+  });
+}
+
+function kwRenderPart(){
+  kwRenderThread();
+  const card = document.getElementById('kw-reader-card');
+  const part = kwCurrentStory.parts[kwCurrentPart];
+
+  let html = `<h3>${kwEscape(kwCurrentStory.title)}</h3><div class="kw-reader-text">`;
+  part.text.forEach(para => {
+    html += `<p>${kwEscape(para)}</p>`;
+  });
+  html += `</div>`;
+
+  if(!kwPartsAnswered[kwCurrentPart]){
+    html += `
+      <div class="kw-quiz">
+        <div class="kw-quiz-label">Pregunta de comprensión (${kwCurrentPart + 1} de ${kwCurrentStory.parts.length})</div>
+        <div class="kw-quiz-q">${kwEscape(part.question)}</div>
+        <div class="kw-options">
+    `;
+    part.options.forEach((opt, idx) => {
+      html += `<button class="kw-option" onclick="kwCheckAnswer(${idx})">${kwEscape(opt)}</button>`;
+    });
+    html += `</div><div class="kw-feedback" id="kw-feedback"></div></div>`;
+  } else {
+    if(kwCurrentPart < kwCurrentStory.parts.length - 1){
+      html += `
+        <div class="kw-quiz">
+          <div class="kw-feedback ok">¡Respuesta correcta! Ya puedes pasar a la siguiente parte.</div>
+          <button class="kw-btn kw-btn-primary" onclick="kwNextPart()">Siguiente parte →</button>
+        </div>
+      `;
+    } else {
+      html += `
+        <div class="kw-finish">
+          <svg class="kw-chakana" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">
+            <rect x="40" y="0" width="20" height="20"/><rect x="40" y="80" width="20" height="20"/>
+            <rect x="0" y="40" width="20" height="20"/><rect x="80" y="40" width="20" height="20"/>
+            <rect x="20" y="20" width="60" height="60"/><rect x="35" y="35" width="30" height="30" fill="#F7F0DD"/>
+          </svg>
+          <h3 style="margin:10px 0 6px 0; color:var(--night);">¡Felicitaciones!</h3>
+          <p style="color:var(--ink-soft); margin:0 0 16px 0;">Has completado todas las partes de esta historia.</p>
+          <button class="kw-btn kw-btn-primary" onclick="kwCloseStory()">Volver a la biblioteca</button>
+        </div>
+      `;
+    }
+  }
+
+  card.innerHTML = html;
+}
+
+function kwCheckAnswer(idx){
+  const part = kwCurrentStory.parts[kwCurrentPart];
+  const buttons = document.querySelectorAll('.kw-option');
+  const feedback = document.getElementById('kw-feedback');
+
+  buttons.forEach((b, i) => {
+    b.setAttribute('disabled', 'true');
+    if(i === part.correct) b.classList.add('correct');
+    if(i === idx && idx !== part.correct) b.classList.add('wrong');
+  });
+
+  if(idx === part.correct){
+    feedback.className = 'kw-feedback ok';
+    feedback.textContent = '¡Correcto!';
+    kwPartsAnswered[kwCurrentPart] = true;
+    setTimeout(() => {
+      kwRenderPart();
+    }, 700);
+  } else {
+    feedback.className = 'kw-feedback no';
+    feedback.textContent = 'Inténtalo de nuevo o lee la parte anterior con atención.';
+    setTimeout(() => {
+      buttons.forEach((b, i) => {
+        b.removeAttribute('disabled');
+        b.classList.remove('wrong');
+      });
+      feedback.textContent = '';
+    }, 1500);
+  }
+}
+
+function kwNextPart(){
+  if(kwCurrentPart < kwCurrentStory.parts.length - 1){
+    kwCurrentPart++;
+    kwRenderPart();
+  }
+}
+
+// Inicializar vistas al cargar
+kwRenderPosts();
+kwRenderLibrary();
+</script>
+</body>
+</html>
